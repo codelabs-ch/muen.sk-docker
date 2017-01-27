@@ -1,0 +1,64 @@
+doctype 5
+|<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+|<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+head
+  meta charset='utf-8'
+  meta name='viewport' content='width=device-width, initial-scale=1.0'
+  link rel='stylesheet' href='/stylesheets/styles.css'
+  link rel='icon' type='image/png' href='images/favicon.png'
+  title=((page.title && page.title != site.title ? [page.title, site.title] : [site.title, site.description]) * ' | ').gsub(/<(\/?[^>]+)>/) { $~[1].start_with?('/') ? ')' : '(' }
+body.antialiased
+  nav.top-bar
+    ul.title-area
+      li.name
+        h1: a href='/' Muen SK
+      li.toggle-topbar.menu-icon: a href='#': span
+    section.top-bar-section
+      ul.right
+        li.divider
+        li: a href='https://git.codelabs.ch/' target='_blank' git.codelabs
+        li.divider
+        li: a href='https://dev.codelabs.ch/' target='_blank' Devs
+        li.divider
+        li: a href='https://codelabs-ch.github.io/perfcharts-muen/' target='_blank' Perfcharts
+        li.divider
+        li: a href='https://github.com/codelabs-ch/' target='_blank' GitHub
+  .container
+    =content
+  footer
+    .row.full-width
+      .large-6.columns
+        .row style='margin-bottom: 1em'
+          .large-5.columns
+            p
+              i.fa.fa-fw.fa-download
+              =<> 'Download:'
+              a href='https://git.codelabs.ch/?p=muen.git' Git
+              br
+              i.fa.fa-fw.fa-group
+              =<> 'Discussions:'
+              a href='https://groups.google.com/forum/#!forum/muen-dev' Mailinglist
+
+      .large-6.large-text-right.columns
+        p
+          |Composed with Asciidoctor.
+          br
+          |&copy; #{site.author} #{Date.today.year}. Content licensed under CC BY 3.0.
+
+  script src='/javascripts/vendor/zepto.js'
+  script src='/javascripts/foundation/foundation.js'
+  - [:topbar,:magellan].each do |component|
+    script src="/javascripts/foundation/foundation.#{component}.js"
+  script
+    |$(function() {
+    | $('h2, h3, h4').each(function() {
+    |   $(this).attr('data-magellan-destination', $(this).attr('id'));
+    | });
+    | $('ul.sectlevel1').find('li').each(function() {
+    |   $(this).attr('data-magellan-arrival', $(this).find('a').first().attr('href').replace('#', ''));
+    | });
+    | $(document).foundation({magellan : {threshold: 0, activeClass: 'active'}});
+    |});
+  - (page.javascripts || []).each do |javascript|
+    script src="/javascripts/#{javascript}.js"
+|</html>
