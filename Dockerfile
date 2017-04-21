@@ -7,9 +7,9 @@
 #
 
 FROM fedora:24
-MAINTAINER Asciidoctor
 
-LABEL Description="This image provides the toolchain for building the muen.sk website."
+LABEL maintainer="reet@codelabs.ch"
+LABEL description="This image provides the toolchain for building the muen.sk website."
 
 RUN echo "deltarpm=false" >> /etc/dnf/dnf.conf
 
