@@ -166,6 +166,19 @@ p, td.content {
     }
   }
 
+  .served {
+    font-size: 0.8em;
+    color: #323232;
+
+    a {
+      text-decoration: none !important;
+      color: #323232;
+    }
+    a:hover {
+      text-decoration: underline !important;
+    }
+  }
+
   a:not(.button) {
     text-decoration: underline;
   }
