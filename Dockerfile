@@ -1,7 +1,7 @@
 # To build image:
-# docker build -t muen/muen-site .
+#   docker build -t muen-website .
 # To run image:
-# docker run -it --rm --net=host -p 4242:4242 muen/muen-site
+#   docker run -it --rm --net=host -p 4242:4242 muen-website
 #
 # Thanks to the asciidoctor team for this great work!
 #
@@ -36,22 +36,30 @@ RUN chown writer:writer /home/writer
 USER writer
 
 ENV HOME /home/writer
-ENV PROJECT_GIT_REPO https://github.com/codelabs-ch/website-muen.sk
+ENV SITE_REPO https://github.com/codelabs-ch/website-muen.sk
+ENV MUEN_REPO https://github.com/codelabs-ch/muen.git
 ENV PROJECT_DIR $HOME/website-muen.sk
-ENV README_URL=https://git.codelabs.ch/?p=muen.git;a=blob_plain;f=README
 
 ENV LANG en_US.UTF-8
 
 WORKDIR $HOME
 
-RUN git clone --single-branch --depth 1 $PROJECT_GIT_REPO $PROJECT_DIR
+ARG site_branch=master
+ADD https://api.github.com/repos/codelabs-ch/website-muen.sk/compare/$site_branch...HEAD /dev/null
+RUN git clone --single-branch --depth 1 -b $site_branch $SITE_REPO $PROJECT_DIR
 WORKDIR $PROJECT_DIR
-RUN wget $README_URL -O README.tmp
-RUN tail -n +4 README.tmp > README.adoc
-RUN rm README.tmp
+
 RUN bundle config --local build.nokogiri --use-system-libraries
 RUN bundle --path=.bundle/gems
 RUN rm -rf .bundle/gems/ruby/*/cache
+
+ARG muen_branch=master
+ADD https://api.github.com/repos/codelabs-ch/muen/compare/$muen_branch...HEAD /dev/null
+RUN git clone -b $muen_branch $MUEN_REPO ../muen
+RUN tail -n +4 ../muen/README > README.adoc \
+	&& mkdir articles \
+	&& find ../muen/doc/articles -maxdepth 1 -type f -exec cp {} articles \; \
+	&& find ../muen/doc/articles/images -maxdepth 1 -type f -exec cp {} images \;
 
 EXPOSE 4242
 

@@ -5,3 +5,6 @@
 /.sass-cache/
 Gemfile.lock
 README.adoc
+articles
+images/graph_*.svg
+images/https-mirageos-muen.jpg

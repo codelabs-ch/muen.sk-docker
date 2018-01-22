@@ -1,0 +1,20 @@
+---
+layout: base
+---
+header
+  .row
+    .large-12.columns
+      h1=page.title
+      p.description
+        |An x86/64 Separation Kernel for High Assurance
+      a.button.secondary href='https://git.codelabs.ch/?p=muen.git' target='_blank' style='color: #323232; max-width: 200px; border-radius: 8px;'
+        i.fa.fa-git-square.fa-2x.pull-left
+        |Checkout source code
+.row
+  .large-9.columns.content
+    #content
+      =content
+  .large-3.columns.secondary.navigation.show-for-medium-up
+    div id='toc' data-magellan-expedition='fixed'
+      .title id='toctitle' =document.attr 'toc-title'
+      =document.converter.convert document, 'outline', toclevels: 2

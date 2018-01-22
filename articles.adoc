@@ -1,7 +1,7 @@
 = Muen
 Reto Buerki <reet@codelabs.ch>, Adrian-Ken Rueegsegger <ken@codelabs.ch>
 // settings:
-:page-layout: docs
+:page-layout: articles
 ifndef::env-site[]
 :toc: left
 :icons: font
@@ -13,5 +13,7 @@ endif::[]
 :idprefix:
 :idseparator: -
 
-== Overview
-include::./README.adoc[]
+// newline after each include is important to make TOC work
+include::./articles/mirageos-unikernel[]
+
+include::./articles/muen-sk-website[]
