@@ -49,7 +49,7 @@ ADD https://api.github.com/repos/codelabs-ch/website-muen.sk/compare/$site_branc
 RUN git clone --single-branch --depth 1 -b $site_branch $SITE_REPO $PROJECT_DIR
 WORKDIR $PROJECT_DIR
 
-RUN bundle config --local build.nokogiri --use-system-libraries
+RUN bundle config --local build.nokogiri --use-system-libraries --with-xml2-include=/usr/include/libxml2
 RUN bundle --path=.bundle/gems
 RUN rm -rf .bundle/gems/ruby/*/cache
 
