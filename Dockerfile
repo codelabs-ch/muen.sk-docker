@@ -55,7 +55,7 @@ RUN rm -rf .bundle/gems/ruby/*/cache
 
 ARG muen_branch=master
 ADD https://api.github.com/repos/codelabs-ch/muen/compare/$muen_branch...HEAD /dev/null
-RUN git clone -b $muen_branch $MUEN_REPO ../muen
+RUN git clone --depth=1 -b $muen_branch $MUEN_REPO ../muen
 RUN tail -n +4 ../muen/README > README.adoc \
 	&& mkdir articles \
 	&& find ../muen/doc/articles -maxdepth 1 -type f -exec cp {} articles \; \
