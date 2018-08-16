@@ -1,0 +1,19 @@
+dist: trusty
+language: generic
+services:
+  - docker
+notifications:
+  email:
+    - travis@codelabs.ch
+env:
+  global:
+    - DOCKER_IMG=codelabsch/muen-website
+  script:
+    - docker pull ${DOCKER_IMG}:${TRAVIS_BRANCH} || true
+    - docker build --cache-from ${DOCKER_IMG}:${TRAVIS_BRANCH}
+      --build-arg muen_branch=devel
+      --build-arg site_branch=${TRAVIS_BRANCH}
+      --tag ${DOCKER_IMG}:${TRAVIS_BRANCH}
+      .
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push ${DOCKER_IMG}:${TRAVIS_BRANCH}
