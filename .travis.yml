@@ -7,11 +7,10 @@ notifications:
     - travis@codelabs.ch
 env:
   global:
-    - DOCKER_IMG=codelabsch/muen-website
+    - DOCKER_IMG=codelabsch/muen.sk-tools
   script:
     - docker pull ${DOCKER_IMG}:${TRAVIS_BRANCH} || true
     - docker build --cache-from ${DOCKER_IMG}:${TRAVIS_BRANCH}
-      --build-arg muen_branch=devel
       --build-arg site_branch=${TRAVIS_BRANCH}
       --tag ${DOCKER_IMG}:${TRAVIS_BRANCH}
       .

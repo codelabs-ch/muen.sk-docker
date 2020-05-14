@@ -37,7 +37,6 @@ USER writer
 
 ENV HOME /home/writer
 ENV SITE_REPO https://github.com/codelabs-ch/website-muen.sk
-ENV MUEN_REPO https://github.com/codelabs-ch/muen.git
 ENV PROJECT_DIR $HOME/website-muen.sk
 
 ENV LANG en_US.UTF-8
@@ -52,14 +51,6 @@ WORKDIR $PROJECT_DIR
 RUN bundle config --local build.nokogiri --use-system-libraries --with-xml2-include=/usr/include/libxml2
 RUN bundle --path=.bundle/gems
 RUN rm -rf .bundle/gems/ruby/*/cache
-
-ARG muen_branch=master
-ADD https://api.github.com/repos/codelabs-ch/muen/compare/$muen_branch...HEAD /dev/null
-RUN git clone --depth=1 -b $muen_branch $MUEN_REPO ../muen
-RUN tail -n +4 ../muen/README > README.adoc \
-	&& mkdir articles \
-	&& find ../muen/doc/articles -maxdepth 1 -type f -exec cp {} articles \; \
-	&& find ../muen/doc/articles/images -maxdepth 1 -type f -exec cp {} images \;
 
 EXPOSE 4242
 
