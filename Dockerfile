@@ -1,7 +1,7 @@
 # To build image:
-#   docker build -t muen-website .
+#   docker build -t muen.sk-docker .
 # To run image:
-#   docker run -it --rm --net=host -p 4242:4242 muen-website
+#   docker run -it --rm --net=host -p 4242:4242 muen.sk-docker
 #
 # Thanks to the asciidoctor team for this great work!
 #
@@ -10,6 +10,10 @@ FROM fedora:24
 
 LABEL maintainer="reet@codelabs.ch"
 LABEL description="This image provides the toolchain for building the muen.sk website."
+
+ENV HOME /home/writer
+ENV PROJECT_DIR $HOME/website-muen.sk
+ENV LANG en_US.UTF-8
 
 RUN echo "deltarpm=false" >> /etc/dnf/dnf.conf
 
@@ -30,22 +34,11 @@ RUN echo -e "To launch site, use the following command:\n\n $ bundle exec rake p
 RUN echo "[ -v PS1 -a -r /etc/motd ] && cat /etc/motd" > /etc/profile.d/motd.sh
 
 RUN groupadd -r writer && useradd  -g writer -u 1000 writer
-RUN mkdir -p /home/writer
-RUN chown writer:writer /home/writer
+RUN mkdir -p $HOME && chmod 755 $HOME
+ADD . $PROJECT_DIR
+RUN chown -R writer:writer $HOME
 
 USER writer
-
-ENV HOME /home/writer
-ENV SITE_REPO https://github.com/codelabs-ch/website-muen.sk
-ENV PROJECT_DIR $HOME/website-muen.sk
-
-ENV LANG en_US.UTF-8
-
-WORKDIR $HOME
-
-ARG site_branch=master
-ADD https://api.github.com/repos/codelabs-ch/website-muen.sk/compare/$site_branch...HEAD /dev/null
-RUN git clone --single-branch --depth 1 -b $site_branch $SITE_REPO $PROJECT_DIR
 WORKDIR $PROJECT_DIR
 
 RUN bundle config --local build.nokogiri --use-system-libraries --with-xml2-include=/usr/include/libxml2
