@@ -7,12 +7,12 @@ notifications:
     - travis@codelabs.ch
 env:
   global:
-    - DOCKER_IMG=codelabsch/muen.sk-tools
-  script:
-    - docker pull ${DOCKER_IMG}:${TRAVIS_BRANCH} || true
-    - docker build --cache-from ${DOCKER_IMG}:${TRAVIS_BRANCH}
-      --build-arg site_branch=${TRAVIS_BRANCH}
-      --tag ${DOCKER_IMG}:${TRAVIS_BRANCH}
-      .
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker push ${DOCKER_IMG}:${TRAVIS_BRANCH}
+    - DOCKER_IMG=codelabsch/muen.sk-docker
+script:
+  - docker pull ${DOCKER_IMG} || true
+  - docker build --cache-from ${DOCKER_IMG}
+    --build-arg site_branch=${TRAVIS_BRANCH}
+    --tag ${DOCKER_IMG}:latest
+    .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ${DOCKER_IMG}:latest
