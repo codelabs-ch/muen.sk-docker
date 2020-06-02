@@ -1,5 +1,7 @@
 README.adoc
+tau0_content.adoc
 articles
+data
 Dockerfile
 Gemfile
 Gemfile.lock
