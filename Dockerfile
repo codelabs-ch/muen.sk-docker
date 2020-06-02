@@ -6,7 +6,7 @@
 # Thanks to the asciidoctor team for this great work!
 #
 
-FROM fedora:24
+FROM fedora:26
 
 LABEL maintainer="reet@codelabs.ch"
 LABEL description="This image provides the toolchain for building the muen.sk website."
