@@ -1,7 +1,7 @@
 # To build image:
 #   docker build -t muen.sk-docker .
 # To run image:
-#   docker run -it --rm --net=host -p 4242:4242 muen.sk-docker
+#   docker run -it --rm --net=host muen.sk-docker
 #
 # Thanks to the asciidoctor team for this great work!
 #
