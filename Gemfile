@@ -3,7 +3,7 @@
 
 source 'https://rubygems.org'
 
-gem 'awestruct', '0.5.7'
+gem 'awestruct', '0.6.1'
 #gem 'awestruct', github: 'awestruct/awestruct', branch: 'master'
 gem 'asciidoctor', '1.5.4'
 #gem 'asciidoctor', github: 'asciidoctor/asciidoctor', branch: 'master'
@@ -11,9 +11,9 @@ gem 'asciidoctor', '1.5.4'
 gem 'chunky_png', '1.3.5'
 gem 'coderay', '1.1.1'
 gem 'compass', '1.0.3'
-gem 'haml', '4.0.7'
-gem 'slim', '3.0.6'
-gem 'tilt', '2.0.2'
+gem 'haml', '5.0.0'
+gem 'slim', '4.1.0'
+gem 'tilt', '2.0.10'
 gem 'zurb-foundation', '4.3.2'
 gem 'rb-inotify', '0.9.7', :platforms => [:ruby, :jruby]
 gem 'tzinfo', '1.2.2', :group => :test
