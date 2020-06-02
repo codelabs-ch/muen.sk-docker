@@ -7,4 +7,5 @@ require 'slim'
 
 Awestruct::Extensions::Pipeline.new do
   engine = Awestruct::Engine.instance
+  transformer Awestruct::Extensions::Minify.new([:js,:html])
 end

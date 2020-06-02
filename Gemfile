@@ -24,8 +24,8 @@ gem 'tomdoc', '0.2.5', :group => :test
 gem 'html-proofer', '3.0.2', :group => :test
 
 # required to use the minify extension
-#gem 'uglifier', '2.7.2'
-#gem 'htmlcompressor', '0.0.3'
+gem 'uglifier', '4.2.0'
+gem 'htmlcompressor', '0.4.0'
 # set EXECJS_RUNTIME=SpiderMonkey as alternative to theruby(racer|rhino)
-#gem 'therubyracer', '0.12.2', :platforms => [:ruby]
-#gem 'therubyrhino', '2.0.4', :platforms => [:jruby]
+gem 'therubyracer', '0.12.3', :platforms => [:ruby]
+gem 'therubyrhino', '2.1.2', :platforms => [:jruby]

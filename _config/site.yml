@@ -18,6 +18,7 @@ asciidoctor:
     #source-highlighter: 'highlight.js'
     source-highlighter: 'coderay'
     prewrap: null
+minify: true
 haml:
   :ugly: true
 slim|html:
